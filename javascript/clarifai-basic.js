@@ -436,9 +436,13 @@ Clarifai.prototype.getTags = function(image){
         function(json){
             if(json.status_code === 'OK'){
               //TODO (jos) handle this better
-              var tags = json.results[0].result.tag.classes;
+              var tags = json.results[0].result.tag;
+              var obj = {};
+              $.each(tags.probs, function(i,val){
+                  obj[tags.classes[i]] = val;
+              });
             }
-            deferred.resolve(tags);
+            deferred.resolve(obj);
         }.bind(this),
         function(e){
             console.error(e);
