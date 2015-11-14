@@ -4,8 +4,8 @@ var clarifai;
 function init(){
     clarifai = new Clarifai(
         {
-            'clientId': 'YOUR_CLIENT_ID',
-            'clientSecret': 'YOUR_CLIENT_SECRET'
+            'clientId': '',
+            'clientSecret': ''
         }
     );
 }
@@ -39,6 +39,14 @@ function predict(){
     clarifai.predict('http://farm3.static.flickr.com/2161/2141620332_2b741028b3.jpg', 'phish', cb).then(
         promiseResolved,
         promiseRejected 
+    );
+}
+
+// grab tags for a particular image
+function getTags(){
+    clarifai.getTags('http://farm3.static.flickr.com/2161/2141620332_2b741028b3.jpg', 'phish', cb).then(
+        promiseResolved,
+        promiseRejected
     );
 }
 

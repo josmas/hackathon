@@ -420,6 +420,33 @@ Clarifai.prototype.listCollections = function(){
     return deferred;
 }
 
+Clarifai.prototype.getTags = function(image){
+    var deferred = $.Deferred();
+    var collectionCreated = false;
+    $.ajax(
+        {
+            'type': 'GET',
+            'url': this.baseUrl + 'tag/?url=' + image,
+            'contentType': 'application/json; charset=utf-8',
+            'headers': {
+                'Authorization': 'Bearer ' + this.accessToken
+            }
+        }
+    ).then(
+        function(json){
+            if(json.status_code === 'OK'){
+              //TODO (jos) handle this better
+              var tags = json.results[0].result.tag.classes;
+            }
+            deferred.resolve(tags);
+        }.bind(this),
+        function(e){
+            console.error(e);
+            deferred.reject();
+        }.bind(this)
+    );
+    return deferred;
+}
 // Turn logging on or off
 Clarifai.prototype.log = function(obj){
     if(this.debug === true){
