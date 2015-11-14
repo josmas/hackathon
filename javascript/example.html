@@ -12,14 +12,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <!-- Latest - compiled and - minified - JavaScript - -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script type="text/javascript" src="clarifai-basic.js"></script>
     <script type="text/javascript" src="example.js"></script>
+    <script type="text/javascript" src="app/controllers.js"></script>
 
     <!-- content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">some stuff here</div>
-        <div class="col-md-4">some stuff here</div>
+    <div class="container-fluid" ng-app="clarifai">
+      <div ng-controller="ImagesListCtrl">
+        <button ng-click="filterFood()">
+          {{foodToggle}}
+        </button>
+        <div ng-repeat="value in images track by $index">
+          <div class="col-xs-3">
+            <img ng-src="{{value[0]}}" width="150" height="150"/>
+            <div ng-show='showTags{{$index}}' class=".box cols-md-2" style="z-index: 1;
+                position: relative">
+              <img ng-src="{{value[0]}}"/>
+              {{value[1].join(',\n') }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
