@@ -24,6 +24,12 @@
         <button ng-click="filterFood()" class="btn btn-primary btn-lg active">
           {{foodToggle}}
         </button>
+        <button ng-click="filterHealthy()" class="btn btn-primary btn-lg active">
+          {{healthyToggle}}
+        </button>
+        <button ng-click="filterTasty()" class="btn btn-primary btn-lg active">
+          {{tastyToggle}}
+        </button>
         <div ng-repeat="value in images track by $index">
           <div class="col-xs-2">
             <div class="thumbnail">
