@@ -1,6 +1,6 @@
 var clariafi = angular.module('clarifai', []);
 
-clariafi.controller('ImagesListCtrl', function ($scope, $http) {
+clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout) {
   console.log('ImagesListCtrl is loaded');
 //  $http.get('data/thumb_standard.json').success(function(foo) { 
 //    $scope.images = _.object(_.map(foo, function(item,x,k) {
@@ -28,5 +28,12 @@ clariafi.controller('ImagesListCtrl', function ($scope, $http) {
       toggle = true;
     }
   };
+
+  $scope.showDetail = function(index){
+    console.log('el index: ' + index);
+    var model = $parse('showTags.i' + index);
+    model.assign($scope, true);
+    $timeout(function(){ model.assign($scope, false); }, 2000);
+  }
 
 });

@@ -20,16 +20,17 @@
     <!-- content -->
     <div class="container-fluid" ng-app="clarifai">
       <div ng-controller="ImagesListCtrl">
-        <button ng-click="filterFood()">
+        <button ng-click="filterFood()" class="btn btn-primary btn-lg active">
           {{foodToggle}}
         </button>
         <div ng-repeat="value in images track by $index">
-          <div class="col-xs-3">
-            <img ng-src="{{value[0]}}" width="150" height="150"/>
-            <div ng-show='showTags{{$index}}' class=".box cols-md-2" style="z-index: 1;
-                position: relative">
-              <img ng-src="{{value[0]}}"/>
-              {{value[1].join(',\n') }}
+          <div class="col-xs-2">
+            <div class="thumbnail">
+              <img ng-src="{{value[0]}}" width="150" height="150" ng-mouseover="showDetail($index)"/>
+              <div ng-show='showTags.i{{$index}}' class=".box cols-md-2" style="z-index: 1;
+                  position: relative">
+                {{value[1].join(',\n') }}
+              </div>
             </div>
           </div>
         </div>
