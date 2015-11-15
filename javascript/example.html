@@ -21,16 +21,16 @@
     <!-- content -->
     <div class="container-fluid" ng-app="clarifai">
       <div ng-controller="ImagesListCtrl">
-        <button ng-click="loginInstagram()" class="btn btn-primary btn-lg active">
+        <button ng-click="loginInstagram()" class="btn btn-primary btn-lg">
           login instagram
         </button>
-        <button ng-click="filterFood()" class="btn btn-primary btn-lg active">
+        <button ng-click="filterFood()" class="btn btn-primary btn-lg">
           {{foodToggle}}
         </button>
-        <button ng-click="filterHealthy()" class="btn btn-primary btn-lg active">
+        <button ng-click="filterHealthy()" class="btn btn-primary btn-lg">
           {{healthyToggle}}
         </button>
-        <button ng-click="filterTasty()" class="btn btn-primary btn-lg active">
+        <button ng-click="filterTasty()" class="btn btn-primary btn-lg">
           {{tastyToggle}}
         </button>
         <div ng-repeat="value in images track by $index">
