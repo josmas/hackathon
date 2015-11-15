@@ -1,6 +1,6 @@
 var clariafi = angular.module('clarifai', []);
 
-clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout) {
+clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout, $location) {
   console.log('ImagesListCtrl is loaded');
 //  $http.get('data/thumb_standard.json').success(function(foo) { 
 //    $scope.images = _.object(_.map(foo, function(item,x,k) {
@@ -69,5 +69,12 @@ clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout)
     model.assign($scope, true);
     $timeout(function(){ model.assign($scope, false); }, 2000);
   }
+
+  $scope.loginInstagram = function(){
+    var client_id = 'f59eb792e0f04da0a64c7158a1bb7d9e';
+    console.log('gonna login');
+    window.open("https://instagram.com/oauth/authorize/?client_id=" + client_id +
+                "&redirect_uri=http://localhost:8080/example.html&response_type=token", "igPopup");
+  };
 
 });
