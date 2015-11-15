@@ -52,10 +52,12 @@
             </div>
             <div class="col-xs-6 col-md-4">
               <canvas id="pie" class="chart chart-pie" chart-data="data"
-                  chart-labels="labels" chart-colours="colours"></canvas>
-              {{healthProb.score}}
-              {{healthTags}}
-              values of tags
+                  chart-labels="labels" chart-colours="colours"
+                  chart-legend="true"></canvas>
+              <div class="bg-danger" ng-show="!isItFood">
+                <span class="glyphicon glyphicon-eye-open"></span>
+                NOT LIKELY TO BE FOOD!
+              </div>
               <canvas id="polar-area" class="chart chart-polar-area"
                   chart-data="dataIngredients" chart-labels="labelIngredients"
                   chart-legend="true"></canvas>

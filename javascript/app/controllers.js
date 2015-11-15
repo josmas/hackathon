@@ -85,6 +85,10 @@ clariafi.controller('ExampleController', function ($scope, $timeout) {
     word: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   };
 
+  $scope.labels =["Healthy", "Tasty"];
+  $scope.colours = [ '#4A7023', '#FF0000' ];
+  $scope.isItFood = 'false';
+
   $scope.trainModel = function(){
     init();
     positive();
@@ -105,13 +109,9 @@ clariafi.controller('ExampleController', function ($scope, $timeout) {
       console.log(res);
       $scope.dataIngredients = _.map(res, function(item){ return item * 100; });
       $scope.labelIngredients = _.keys(res);
+      $scope.isItFood = _.contains($scope.labelIngredients, 'food');
       $scope.$digest();
     });
   };
 
-  $scope.labels =["Healthy", "Tasty"];
-
-//  $scope.data = [ $scope.healthProb, ( 1 - $scope.healthProb ) ];
-  $scope.data = [ 75, 25 ];
-  $scope.colours = [ '#4A7023', '#FF0000' ];
 });
