@@ -78,3 +78,26 @@ clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout,
   };
 
 });
+
+clariafi.controller('ExampleController', function ($scope) {
+  $scope.example = {
+    text: 'http://pickyeaterblog.com/wp-content/uploads/2009/06/IMG_3930.jpg',
+    word: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+  };
+
+  $scope.trainModel = function(){
+    console.log('parame aqui');
+    init();
+    positive();
+    negative()
+    train();
+  };
+  $scope.sendRequest = function(url) {
+    console.log(url);
+    predict(url, function(res){ // library does not send error FIXME
+      console.log(res);
+      $scope.healthProb = res;
+      $scope.$digest();
+    });
+  }
+});
