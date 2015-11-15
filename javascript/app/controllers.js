@@ -88,12 +88,22 @@ clariafi.controller('ExampleController', function ($scope, $timeout) {
   $scope.labels =["Healthy", "Tasty"];
   $scope.colours = [ '#4A7023', '#FF0000' ];
   $scope.isItFood = 'false';
+  $scope.loading = false;
 
   $scope.trainModel = function(){
+    $scope.loading = true;
     init();
     positive();
-    negative()
-    train();
+    negative();
+    //TODO (jos) bad hack instead of calling train inside callbacks - use
+    //timeout for 2 seconds.
+    $timeout(function(){
+      train('healthy', function(res) {
+        console.log(res);
+        $scope.loading = false;
+        $scope.$digest();
+      });
+    }, 2000);
   };
 
   $scope.sendRequest = function(url) {

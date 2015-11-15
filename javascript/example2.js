@@ -29,7 +29,7 @@ function negative(){
 }
 
 // explicitly train our concept
-function train(){
+function train(topic, cb){
     clarifai.train('healthy', cb).then(
         promiseResolved,
         promiseRejected 
