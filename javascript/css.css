@@ -1,3 +1,7 @@
 body {
   background-image: url('./images/confectionary.png');
 }
+
+.other-background {
+  background-image: url(http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/concrete_seamless.png);
+}
