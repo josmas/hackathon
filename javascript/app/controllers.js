@@ -1,4 +1,4 @@
-var clariafi = angular.module('clarifai', []);
+var clariafi = angular.module('clarifai', ['chart.js']);
 
 clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout, $location) {
   console.log('ImagesListCtrl is loaded');
@@ -79,25 +79,39 @@ clariafi.controller('ImagesListCtrl', function ($scope, $http, $parse, $timeout,
 
 });
 
-clariafi.controller('ExampleController', function ($scope) {
+clariafi.controller('ExampleController', function ($scope, $timeout) {
   $scope.example = {
     text: 'http://pickyeaterblog.com/wp-content/uploads/2009/06/IMG_3930.jpg',
     word: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   };
 
   $scope.trainModel = function(){
-    console.log('parame aqui');
     init();
     positive();
     negative()
     train();
   };
+
   $scope.sendRequest = function(url) {
     console.log(url);
     predict(url, function(res){ // library does not send error FIXME
       console.log(res);
       $scope.healthProb = res;
+      $scope.data = [ res.score * 100, (100 - res.score * 100) ];
       $scope.$digest();
     });
-  }
+
+    getTags(url, function(res){
+      console.log(res);
+      $scope.dataIngredients = _.map(res, function(item){ return item * 100; });
+      $scope.labelIngredients = _.keys(res);
+      $scope.$digest();
+    });
+  };
+
+  $scope.labels =["Healthy", "Tasty"];
+
+//  $scope.data = [ $scope.healthProb, ( 1 - $scope.healthProb ) ];
+  $scope.data = [ 75, 25 ];
+  $scope.colours = [ '#4A7023', '#FF0000' ];
 });

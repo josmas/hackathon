@@ -8,6 +8,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
     <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="lib/angular-chart.min.css">
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -17,6 +18,8 @@
     <script type="text/javascript" src="clarifai-basic.js"></script>
     <script type="text/javascript" src="example2.js"></script>
     <script type="text/javascript" src="app/controllers.js"></script>
+    <script type="text/javascript" src="lib/Chart.min.js"></script>
+    <script type="text/javascript" src="lib/angular-chart.min.js"></script>
 
     <!-- content -->
     <div class="container-fluid" ng-app="clarifai">
@@ -27,31 +30,40 @@
         <button ng-click="backToImages()" class="btn btn-primary btn-lg">
           Back to Images site 
         </button>
-          <form name="myForm">
-            <label>URL:
-              <input type="text" name="input" ng-model="example.text"
-                     ng-pattern="example.word" required ng-trim="false">
-            </label>
-            <button ng-click="sendRequest(example.text)" class="btn
-                btn-success">
-              Healhty or Tasty
-            </button>
-            <div role="alert">
-              <span class="error" ng-show="myForm.input.$error.required">
-                Required!</span>
-              <span class="error" ng-show="myForm.input.$error.pattern">
-                URLs only!</span>
-            </div>
-            <tt>text = {{example.text}}</tt><br/>
-          </form>
-          <div class="thumbnail">
-            <div class=".box cols-md-1" style="z-index: 1;
-                position: relative">
+        <form name="myForm">
+          <label>URL:
+            <input type="text" name="input" ng-model="example.text"
+                   ng-pattern="example.word" required ng-trim="false">
+          </label>
+          <button ng-click="sendRequest(example.text)" class="btn
+              btn-success">
+            Healhty or Tasty
+          </button>
+          <div role="alert">
+            <span class="error" ng-show="myForm.input.$error.required">
+              Required!</span>
+            <span class="error" ng-show="myForm.input.$error.pattern">
+              URLs only!</span>
+          </div>
+          <tt>text = {{example.text}}</tt><br/>
+        </form>
+        <div class="thumbnail">
+          <div class="row">
+            <div class="col-xs-12 col-md-8">
               <img ng-src="{{example.text}}"/>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <canvas id="pie" class="chart chart-pie" chart-data="data"
+                  chart-labels="labels" chart-colours="colours"></canvas>
               {{healthProb.score}}
+              {{healthTags}}
               values of tags
+              <canvas id="polar-area" class="chart chart-polar-area"
+                  chart-data="dataIngredients" chart-labels="labelIngredients"
+                  chart-legend="true"></canvas>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </body>

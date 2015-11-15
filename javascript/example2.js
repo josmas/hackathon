@@ -46,9 +46,9 @@ function predict(urlToPredict, cb){
 }
 
 // grab tags for a particular image
-function getTags(urlToPredict){
+function getTags(urlToPredict, cb){
     var url = urlToPredict || 'http://farm3.static.flickr.com/2161/2141620332_2b741028b3.jpg';
-    clarifai.getTags(url, 'healthy', cb).then(
+    clarifai.getTags(url, cb).then(
         promiseResolved,
         promiseRejected
     );

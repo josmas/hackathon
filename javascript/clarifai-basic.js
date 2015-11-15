@@ -420,7 +420,7 @@ Clarifai.prototype.listCollections = function(){
     return deferred;
 }
 
-Clarifai.prototype.getTags = function(image){
+Clarifai.prototype.getTags = function(image, callback){
     var deferred = $.Deferred();
     var collectionCreated = false;
     $.ajax(
@@ -443,6 +443,9 @@ Clarifai.prototype.getTags = function(image){
               });
             }
             deferred.resolve(obj);
+            if(callback){
+              callback.call(this, obj);
+            }
         }.bind(this),
         function(e){
             console.error(e);
